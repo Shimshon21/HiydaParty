@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/add_a_party_background_new">
+
+<TextView
+        android:id="@+id/currentPartyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="45dp"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="#ffffff"
+        android:text="Party Name" />
+    <TextView
+        android:id="@+id/detailCapacity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:layout_centerInParent="true"
+        android:textSize="22dp"
+        android:text="Current attendees:"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/currentPartyTitle"/>
+    <TextView
+        android:id="@+id/detailLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_centerInParent="true"
+        android:textSize="22dp"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/detailCapacity"
+        android:text="Location:"/>
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:onClick="startMapActivity"
+        android:background="@drawable/placeholder"/>
+    <TextView
+        android:id="@+id/detailTime"
+        android:layout_below="@+id/detailLocation"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:textSize="22dp"
+        android:textColor="#ffffff"
+        android:layout_height="wrap_content"
+        android:text="Time"/>
+    <!--<ImageView
+        android:id="@+id/detailImage"
+        android:layout_below="@+id/numOfTickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/mdtp_transparent_black"
+        android:src="@drawable/fanjoya"
+        android:layout_centerInParent="true"></ImageView>
+         -->
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/circleImage"
+        android:layout_below="@+id/numOfTickets"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/fanjoya"
+        app:civ_border_color="#0b5b6d"
+        app:civ_border_width="1dp"
+        app:civ_shadow="true"
+        app:civ_shadow_radius="20"
+        app:civ_shadow_color="#e4292929">
+
+    </com.mikhaellopez.circularimageview.CircularImageView>
+
+    <EditText
+        android:id="@+id/numOfTickets"
+        android:textColorHint="#ffffff"
+        android:backgroundTint="#ffffff"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailTime"
+        android:hint="Enter number of tickets"
+        android:layout_centerInParent="true"
+        android:inputType="number"
+        android:textColor="#ffffff"/>
+    <Button
+        android:id="@+id/attendButton"
+        android:background="@drawable/submit_button_newest"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Attend"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:foreground="@drawable/ripple_no_corners"
+        android:layout_alignParentBottom="true"
+        android:onClick="Submit"
+        android:layout_centerInParent="true" />
+</RelativeLayout>

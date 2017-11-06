@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/add_a_party_background_new"
+    tools:context="com.example.sh_polak.hiyda.Activities.MainActivity">
+
+    <ProgressBar
+        android:id="@+id/listFragViewProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/btnsMenues"
+        android:id="@+id/partyListFrag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/list_view_divider"
+
+        />
+</RelativeLayout>

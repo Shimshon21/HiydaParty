@@ -1,0 +1,160 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ff00ff</item>
+        <item name="colorPrimaryDark">#ff0ff0</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="LoginTextStyle">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginStart">125dp</item>
+        <item name="android:paddingLeft">28dp</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColorHint">#ffffff</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:backgroundTint">#ffffff</item>
+        <item name="android:colorBackground">#ff0ff0</item>
+    </style>
+
+    <style name="LoginButtonStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginStart">125dp</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+
+
+    <style name="SignupStyle">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginStart">125dp</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+
+
+    <style name="SignupButtonStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginStart">125dp</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="uploadButtonStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginStart">225dp</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="SubmitParentButtonStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginStart">225dp</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+
+
+    <style name="partyStyle">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginTop">35dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+
+    <style name="SignUpTextStyle">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginStart">125dp</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColorHint">#ffffff</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:backgroundTint">#ffffff</item>
+    </style>
+
+    <style name = "AppThemeNew" parent = "android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/NoActionBar</item>
+    </style>
+    <style name="NoActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="AppFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionBarStyle">@style/NoActionBar</item>
+    </style>
+
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#ff0ff0</item>
+    </style>
+
+    <style name="LoginSpinnerStyle">
+        <item name="android:textColor">#ff00d5</item>
+    </style>
+
+
+    <style name="MyActionBaros" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#ff0ff0</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">#4e788e</item>
+
+
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+
+    </style>
+</resources>
