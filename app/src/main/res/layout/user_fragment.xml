@@ -2,11 +2,14 @@
 <RelativeLayout
     android:id="@+id/UserFragement" xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/add_a_party_background_new"
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/myOrder"
-        android:text="my order"
+        android:text="My orders"
         android:gravity="center"
+        android:background="@drawable/login_button"
+        android:textColor="#ffff"
         android:textSize="50sp"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
@@ -17,18 +20,22 @@
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/login_button"
         android:text="LogOut"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"/>
 
     <TextView
-        android:id="@+id/myFavorites"
-        android:text="my favorite"
+        android:id="@+id/addParty"
+        android:text="AddParty"
         android:gravity="center"
+        android:textColor="#ffff"
+        android:background="@drawable/login_button"
         android:textSize="50sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/myOrder"
+        android:onClick="RegisterParty"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

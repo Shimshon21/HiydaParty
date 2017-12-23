@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sh_polak.hiyda.utils.MySqlLite;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -50,7 +53,9 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
     CheckBox checkBox;
     boolean typeUser, rememberMe = false, isCliked;
     LoginButton loginButton;
+    SQLiteDatabase db;
     CallbackManager callbackManager;
+
   public static SharedPreferences facUserLogged;
 
     @Override
@@ -148,6 +153,8 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
         Typeface tf = Typeface.createFromAsset(getAssets(), "superfruit.ttf");
         TextView tv = (TextView) findViewById(R.id.title);
         tv.setTypeface(tf);
+        db = new MySqlLite(this).getReadableDatabase();
+        db.execSQL("CREATE TABLE  IF NOT EXISTS  favoritess (id INTEGER PRIMARY KEY, name VARCHAR(10),PartyImage Blob,DateTime DATETIME,isFavorite BIT)");
          }
 
     public void isValidLogin() {//check if user_fragment still Log

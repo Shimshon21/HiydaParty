@@ -9,8 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class MySqlLite extends SQLiteOpenHelper {
+
+
    private static final String dbName="MyDataBase";
-    String[] initialStat={"CREATE TABLE  IF NOT EXISTS  favorites (id INTEGER PRIMARY KEY, partyName VARCHAR(10),Image Blob,partyDate DATETIME,isFavorite BIT)","CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY ,userName VARCHAR(10),UserId VARCHAR(10))"};
+    String[] initialStat={"CREATE TABLE  IF NOT EXISTS  favoritess (id INTEGER PRIMARY KEY, name VARCHAR(10),PartyImage Blob,DateTime DATETIME,isFavorite BIT)","CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY ,userName VARCHAR(10),UserId VARCHAR(10))"};
     public MySqlLite(Context context) {
         super(context,dbName, null, 1);
     }

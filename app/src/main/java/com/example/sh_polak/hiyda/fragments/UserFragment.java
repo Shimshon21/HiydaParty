@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.example.sh_polak.hiyda.Activities.AddPartyActivity;
 import com.example.sh_polak.hiyda.Activities.FavoriteActivity;
 import com.example.sh_polak.hiyda.Activities.LoginActivity;
 import com.example.sh_polak.hiyda.Interface.AppConfig;
@@ -47,8 +48,8 @@ public class UserFragment extends Fragment implements AppConfig {
     @Override
     public void appConfiguration() {
         btnLogOut=(Button)root.findViewById(R.id.logoutBtn);
-        TextView favorites = (TextView)root.findViewById(R.id.myFavorites);
-        favorites.setOnClickListener((View view)-> startActivity(new Intent(getActivity(), FavoriteActivity.class)));
+        TextView addParty = (TextView)root.findViewById(R.id.addParty);
+        addParty.setOnClickListener((View view)-> startActivity(new Intent(getActivity(), AddPartyActivity.class)));
         logout(btnLogOut);
     }
 

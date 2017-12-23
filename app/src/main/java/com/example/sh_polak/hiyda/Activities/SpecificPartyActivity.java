@@ -42,6 +42,7 @@ public class SpecificPartyActivity extends AppCompatActivity implements AppConfi
         appConfiguration();
         setViewsDetails();
     }
+
     public void Submit(View view) {
         System.out.println(attenders.getText());
         HashMap contact = new HashMap();
@@ -112,7 +113,7 @@ public class SpecificPartyActivity extends AppCompatActivity implements AppConfi
         Bundle bundle = getIntent().getExtras();
         DataQueryBuilder builder = DataQueryBuilder.create();
         builder.setWhereClause(bundle.getString("objectId"));
-        Backendless.Data.of("A_publicist_user").find(builder, new AsyncCallback<List<Map>>() {//todo put this in the activity it goes
+        Backendless.Data.of("A_publicist_user").find(builder, new AsyncCallback<List<Map>>() {
             @Override
             public void handleResponse(List<Map> repnonse) {
                 if(!repnonse.equals(null)) {
@@ -149,9 +150,4 @@ public class SpecificPartyActivity extends AppCompatActivity implements AppConfi
 
     }
 
-    public void startMapActivity(View view) {
-        PremissionManger.check(this, Manifest.permission.ACCESS_FINE_LOCATION,0);
-        Intent i =new Intent(this,MapsActivity.class);
-        startActivity(i);
-    }
 }

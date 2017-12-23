@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sh_polak.hiyda.Activities.FavoriteActivity">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/FavoriteList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
 
 </RelativeLayout>

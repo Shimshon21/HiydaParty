@@ -19,7 +19,7 @@ public class PartiesList extends Fragment implements AppConfig {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.parties_list_fragment,container,false);
+        return inflater.inflate(R.layout.favorites_list_fragment,container,false);
     }
 
     @Override

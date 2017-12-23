@@ -31,7 +31,7 @@ import java.util.Map;
  * Created by hackeru on 17/09/2017.
  */
 
-public class PartyListAdapter extends BaseAdapter {
+public class PartyListAdapter extends BaseAdapter { // Info  not used.
 
     private final List<Map> results;
     private final Context context;

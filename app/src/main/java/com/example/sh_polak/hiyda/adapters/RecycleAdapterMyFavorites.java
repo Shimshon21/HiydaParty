@@ -2,7 +2,6 @@ package com.example.sh_polak.hiyda.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
@@ -28,17 +27,17 @@ import java.util.Map;
  * Created by hackeru on 9/26/2017.
  */
 
-public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.RecyclerHolder> {
+public class RecycleAdapterMyFavorites extends RecyclerView.Adapter<RecycleAdapterMyFavorites.RecyclerHolder>  {
     Context context;
     List<Map> result;
     boolean isCliked;
     SQLiteDatabase db;
 
-    public RecycleAdapterList(Context context, List<Map> result) {
+    public RecycleAdapterMyFavorites(Context context, List<Map> result) {
         this.context = context;
         this.result = result;
       try{
-          db = new MySqlLite(context).getReadableDatabase();
+          db = new MySqlLite(context).getReadableDatabase();//? what is getwritableDatabase
 
       }catch (NullPointerException e){
           System.out.println(e);
@@ -52,7 +51,7 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
         View view = LayoutInflater.from(context).inflate(R.layout.row, parent, false);
         //View v =new View(context);
         final RecyclerHolder holder = new RecyclerHolder(view);
-        holder.layout.setOnClickListener(new View.OnClickListener() {
+    /*    holder.layout.setOnClickListener(new View.OnClickListener() { // Todo add objectId to sql to open specificParyActivity
             @Override
             public void onClick(View view) {
                 int index = holder.getIndex();
@@ -60,18 +59,17 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
                 if (!result.get(index).get("PartyImage").toString().equals(null))
                     goToSpecificActivity(result.get(index).get("objectId").toString());
             }
-        });
+        });*/
         return holder;
     }
 
     @Override
     public void onBindViewHolder(final RecyclerHolder holder, final int position) {//change the specific view
-//        Map map = result.get(position);//// TODO add image and textView import the image from result.get("ImageParty")
-        final String partyName = result.get(position).get("name").toString();
+
+        final String partyname = result.get(position).get("name").toString();
         final String partyDate = result.get(position).get("DateTime").toString();
         final String partyImage = result.get(position).get("PartyImage").toString();
         ((RecyclerHolder) holder).textView.setText(result.get(position).get("name").toString());
-
         ImageLoadTask task = new ImageLoadTask() {//configure the imageView.
             @Override
             protected void onPreExecute() {
@@ -89,43 +87,25 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
             }
         };//condigure the imageView.
         holder.loadTask(task, partyImage);
-        holder.textView2.setText(partyDate);
+        holder.textView2.setText(result.get(position).get("DateTime").toString());
         holder.setIndex(position);
 
-            ifExistInTable(holder,partyName); //
-
-            addToFavoritesList(holder,partyName,partyImage,partyDate);
-        }
-
-
-    private void ifExistInTable(RecyclerHolder holder, String partyName) {//checking if value exist in sql table favoritess if set checked else unchecked
         if (db != null) {
-            Cursor c = db.rawQuery("SELECT name FROM favoritess WHERE name =?", new String[]{partyName}); // check if the value exists
-            if (c.moveToFirst()) { //check if found the value
-                boolean b = c.getString(0).equals(partyName);
-                System.out.println(b);
-                if (c.getString(0).equals(partyName)) {// if the value match set checked current row
-                    holder.favorite.setChecked(true);
-                    System.out.println(c.getString(0));
-                } else
-                    holder.favorite.setChecked(false);
-            } else if (holder.favorite.isChecked()) {//todo - fix bug to change favorite check when the reuse favorite button checked is repeating itself when scroll list.
-
+            if (db.rawQuery("SELECT id FROM favoritess WHERE name =?", new String[]{partyname}).getCount() > 0) {
+                holder.favorite.setChecked(true);
             }
+            holder.favorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                String insert;
+                if (isChecked) {
+                    insert = " INSERT INTO favoritess (name,PartyImage,DateTime,isFavorite) VALUES ((?),(?),(?),'1') ";
+                    db.execSQL(insert, new String[]{partyname, partyImage, partyDate});
+                } else {
+                    insert = " DELETE FROM favoritess WHERE name =(?)";
+                    db.execSQL(insert, new String[]{partyname});
+                    notifyDataSetChanged();
+                }
+            });
         }
-    }
-
-    private void addToFavoritesList(RecyclerHolder holder,String partyname,String partyImage ,String partyDate) { //when checked add to sql  table favoritess when is not checked remove..
-        holder.favorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            String insert;
-            if (isChecked) {
-                insert = " INSERT INTO favoritess (name,PartyImage,DateTime,isFavorite) VALUES ((?),(?),(?),'1') ";
-                db.execSQL(insert, new String[]{partyname, partyImage, partyDate});
-            } else {
-                insert = " DELETE FROM favoritess WHERE name =(?)";
-                db.execSQL(insert, new String[]{partyname});
-            }
-        });
     }
 
     @Override
@@ -133,12 +113,17 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
         return result.size();
     }
 
+
+
     public class RecyclerHolder extends RecyclerView.ViewHolder {
+        //variables decleration.
+
         public TextView textView, textView2;
         public ImageView imageView;
         public ProgressBar progressBar;
         public RelativeLayout layout;
-        public CheckBox favorite; // add to list MyFavorites list.
+        public boolean iscliked;
+        public CheckBox favorite;
         private int index;
         private ImageLoadTask currentTask;
 
@@ -169,7 +154,7 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
         }
     }
 
-    private void goToSpecificActivity(final String object) {//if clicked go to SpecificPartyActivity and send specifc row objects from backendless
+    private void goToSpecificActivity(final String object) {//if cliked go to SpecificPartyActivity and send specifc row objects from backendless
         final Intent i = new Intent(context, SpecificPartyActivity.class);
         DataQueryBuilder builder = DataQueryBuilder.create();
         builder.setWhereClause("ObjectId = '" + object + "'");

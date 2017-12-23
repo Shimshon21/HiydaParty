@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements AppConfig {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_oldversion);
         appConfiguration();
         loadPartyList();
         partiesListViews.setLayoutManager(new LinearLayoutManager(this));//u have to config layout manger for recycle view

@@ -39,11 +39,7 @@
         android:textColor="#ffffff"
         android:layout_below="@+id/detailCapacity"
         android:text="Location:"/>
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:onClick="startMapActivity"
-        android:background="@drawable/placeholder"/>
+
     <TextView
         android:id="@+id/detailTime"
         android:layout_below="@+id/detailLocation"

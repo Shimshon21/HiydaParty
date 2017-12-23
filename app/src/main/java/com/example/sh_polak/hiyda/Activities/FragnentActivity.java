@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.sh_polak.hiyda.R;
-import com.example.sh_polak.hiyda.fragments.Myorders;
+import com.example.sh_polak.hiyda.fragments.MyFavorites;
 import com.example.sh_polak.hiyda.fragments.MainListActivity;
 import com.example.sh_polak.hiyda.fragments.PartiesList;
 import com.example.sh_polak.hiyda.fragments.SearcParty;
@@ -26,13 +26,13 @@ public class FragnentActivity extends AppCompatActivity  {
         fragmentMap.put("UserFragement",new UserFragment());
         fragmentMap.put("SearcParty",new SearcParty());
         fragmentMap.put("PartiesList",new PartiesList());
-        fragmentMap.put("Myorders",new Myorders());
+        fragmentMap.put("MyFavorites",new MyFavorites());
         fragmentMap.put("MainListActivity",new MainListActivity());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_test);
+        setContentView(R.layout.activity_main);
         FragmentTransaction  transaction=getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.section,new MainListActivity());
         transaction.commit();
