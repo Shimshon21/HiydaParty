@@ -1,5 +1,6 @@
 package com.example.sh_polak.hiyda.fragments;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,15 +20,13 @@ import android.widget.Toast;
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
-import com.example.sh_polak.hiyda.Activities.MainActivity;
 import com.example.sh_polak.hiyda.Interface.AppConfig;
 import com.example.sh_polak.hiyda.R;
-import com.example.sh_polak.hiyda.adapters.RecycleAdapterTest;
+import com.example.sh_polak.hiyda.adapters.RecycleAdapterList;
+import com.example.sh_polak.hiyda.utils.PremissionManger;
 
 import java.util.List;
 import java.util.Map;
-
-import static com.example.sh_polak.hiyda.R.layout.view;
 
 
 /**
@@ -44,6 +42,7 @@ public class MainListActivity extends Fragment implements AppConfig {
     EditText search;
     ListView listView;
     View v;
+    int LOCATION_REQ=0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,6 +60,7 @@ public class MainListActivity extends Fragment implements AppConfig {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PremissionManger.check(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION,LOCATION_REQ);
         loadPartyList();
     }
 
@@ -74,6 +74,7 @@ public class MainListActivity extends Fragment implements AppConfig {
         search=(EditText)v.findViewById(R.id.searcPart);
         partiesListViews.setLayoutManager(new LinearLayoutManager(getContext()));
     }
+
     private void loadPartyList(){//Load images and party listviews
         Backendless.Data.of("A_publicist_user").find(new AsyncCallback<List<Map>>() {
             @Override
@@ -81,9 +82,8 @@ public class MainListActivity extends Fragment implements AppConfig {
                 result = response;
                 Log.i("result",result.toString());
 
-                partiesListViews.setAdapter(new RecycleAdapterTest(getContext(), result));//cant load more than 10 items because of backe endlesss
+                partiesListViews.setAdapter(new RecycleAdapterList(getContext(), result));//cant load more than 10 items because of backe endlesss
                 mainProgressbar.setVisibility(View.INVISIBLE);
-                Log.i("url", result.get(0).get("PartyImage").toString());
             }
 
             @Override
@@ -96,22 +96,11 @@ public class MainListActivity extends Fragment implements AppConfig {
         //System.out.println(result);
         // partiesListViews.setAdapter(new PartyListAdapter(MainActivity.this,R.layout.row,result));
     }
-    public void Logout(View view) {//logout from user_fragment
-        Backendless.UserService.logout(new AsyncCallback<Void>() {
-            @Override
-            public void handleResponse(Void response) {
-                getActivity().finish();
-            }
 
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                Toast.makeText(getContext(), "Error occoured" + fault.getCode(), Toast.LENGTH_LONG).show();
-            }
-        });
+
+
+
+
+
     }
-    public void AddtoFavorite (View v){
-        if(((CheckBox)v).isChecked()){
-            System.out.println("True");
-        }
-    }
-}
+

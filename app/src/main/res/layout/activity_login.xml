@@ -18,7 +18,7 @@
         android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
-        android:text="party"
+        android:text="Hiyda"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff" />
 
@@ -116,11 +116,7 @@
         android:textColor="#ffffff"
         android:background="@drawable/notamember"
         android:onClick="startSignUpUserActivty" />
-    <ImageView
-        android:background="@drawable/waze"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:onClick="startWaze"/>
+
 
 
 </RelativeLayout>

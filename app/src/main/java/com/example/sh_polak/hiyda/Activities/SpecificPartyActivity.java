@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,12 +27,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 public class SpecificPartyActivity extends AppCompatActivity implements AppConfig {
-    RelativeLayout layout;
+    RelativeLayout layout,layout2;
     int capacity;
-    String obid;
+    String obid,nameParty,imageUrl,time,location;
     TextView title,freeCapacity,dateTime,place;
     ImageView imageParty, imageParty2;
     EditText attenders;
+    ProgressBar loadinProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,23 +100,53 @@ public class SpecificPartyActivity extends AppCompatActivity implements AppConfi
         dateTime = (TextView) layout.findViewById(R.id.detailTime);
         place = (TextView) layout.findViewById(R.id.detailLocation);
         attenders = (EditText) layout.findViewById(R.id.numOfTickets);
+        loadinProgress=(ProgressBar)layout.findViewById(R.id.selectedProgress);
         //imageParty = (ImageView) layout.findViewById(R.id.detailImage);
         imageParty2 = (ImageView) layout.findViewById(R.id.circleImage);
+        layout2=(RelativeLayout)findViewById(R.id.viewsShow);
     }
 
     private void setViewsDetails() {
+        //show progress bar + hide layout
+
         Bundle bundle = getIntent().getExtras();
-        Bitmap bmp=ImageLoadTask.getSingleImage( bundle.getString("Image"));
-        //imageParty.setImageBitmap(bmp);
-        imageParty2.setImageBitmap(bmp);
-        title.setText(bundle.getString("name"));
-        capacity=bundle.getInt("capacity");
-        if (capacity > 0)
-        freeCapacity.setText("Tickets left :"+ capacity);
-        else freeCapacity.setText("No more tickets left");
-        dateTime.setText("Date and Time :"+bundle.getString("time"));
-        place.setText("Location : "+bundle.getString("location"));
-        obid=bundle.getString("ObjectId");
+        DataQueryBuilder builder = DataQueryBuilder.create();
+        builder.setWhereClause(bundle.getString("objectId"));
+        Backendless.Data.of("A_publicist_user").find(builder, new AsyncCallback<List<Map>>() {//todo put this in the activity it goes
+            @Override
+            public void handleResponse(List<Map> repnonse) {
+                if(!repnonse.equals(null)) {
+                    Map result = repnonse.get(0);
+                    imageUrl = result.get("PartyImage").toString();
+                    nameParty = result.get("name").toString();
+                    time = result.get("DateTime").toString();
+                    location = result.get("Location").toString();
+                    capacity = Integer.parseInt(result.get("Capacity").toString());
+                    Bitmap bmp = ImageLoadTask.getSingleImage(imageUrl);
+                    //imageParty.setImageBitmap(bmp);
+                    imageParty2.setImageBitmap(bmp);
+                    title.setText(nameParty);
+                    if (capacity > 0)
+                        freeCapacity.setText("Tickets left :" + capacity);
+                    else freeCapacity.setText("No more tickets left");
+                    dateTime.setText(time);
+                    place.setText(location);
+                    loadinProgress.setVisibility(View.INVISIBLE);
+                    layout2.setVisibility(View.VISIBLE);
+                } else {
+                 Toast.makeText(getApplicationContext(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                //hide progress bar + show layout
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Log.d("searchItemError", fault.getDetail());
+
+            }
+        });
+
     }
 
     public void startMapActivity(View view) {

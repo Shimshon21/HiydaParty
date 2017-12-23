@@ -2,17 +2,13 @@ package com.example.sh_polak.hiyda.Activities;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,17 +19,12 @@ import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.example.sh_polak.hiyda.Interface.AppConfig;
 import com.example.sh_polak.hiyda.R;
-import com.example.sh_polak.hiyda.adapters.PartyListAdapter;
-import com.example.sh_polak.hiyda.adapters.RecycleAdapterTest;
+import com.example.sh_polak.hiyda.adapters.RecycleAdapterList;
 import com.example.sh_polak.hiyda.utils.ImageLoadTask;
 import com.example.sh_polak.hiyda.utils.MySqlLite;
-import com.facebook.CallbackManager;
-import com.facebook.login.LoginManager;
 
 import java.util.List;
 import java.util.Map;
-
-import bolts.CancellationTokenRegistration;
 
 public class MainActivity extends AppCompatActivity implements AppConfig {
     RecyclerView partiesListViews;
@@ -53,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements AppConfig {
         appConfiguration();
         loadPartyList();
         partiesListViews.setLayoutManager(new LinearLayoutManager(this));//u have to config layout manger for recycle view
-        
        //setAdapterw for partiesListViews
     }
 
@@ -63,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements AppConfig {
             public void handleResponse(List<Map> response) {
                 result = response;
                 Log.i("result",result.toString());
-                partiesListViews.setAdapter(new RecycleAdapterTest(MainActivity.this, result));//cant load more than 10 items because of backe endlesss
+                partiesListViews.setAdapter(new RecycleAdapterList(MainActivity.this, result));//cant load more than 10 items because of backe endlesss
                 mainProgressbar.setVisibility(View.INVISIBLE);
-                //partiesListViews.setAdapter(new RecycleAdapterTest(MainActivity.this,result));
+                //partiesListViews.setAdapter(new RecycleAdapterList(MainActivity.this,result));
                // loadImagesInBackground(result);//loading all images in background
                 Log.i("url", result.get(0).get("PartyImage").toString());
             /*    partiesListViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -164,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements AppConfig {
         Backendless.Data.of("A_publicist_user").find(queryBuilder, new AsyncCallback<List<Map>>() {
             @Override
             public void handleResponse(List<Map> response) {
-                partiesListViews.setAdapter(new RecycleAdapterTest(getApplicationContext(),response));
+                partiesListViews.setAdapter(new RecycleAdapterList(getApplicationContext(),response));
             }
 
             @Override

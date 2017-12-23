@@ -19,7 +19,7 @@ public class ImageLoadTask extends AsyncTask <String, Void, Bitmap> {
     //Mini fly-weight
     private static Map<String, Bitmap> flyweightImgs = new HashMap();
 
-    public static void loadImages(final List<Map> results, final Runnable callback) {
+    public static void loadImages(final List<Map> results, final Runnable callback) {//not used
         new Thread() {
             public void run() {
                 for (Map r : results) {
@@ -38,7 +38,7 @@ public class ImageLoadTask extends AsyncTask <String, Void, Bitmap> {
     }
 
     @Override
-    protected Bitmap doInBackground(String... urls) {//not used!!!!
+    protected Bitmap doInBackground(String... urls) {
         String url = urls[0];//given image URL
         Bitmap bmp = flyweightImgs.get(url);//check if already exists
         if (bmp != null) return bmp;//if already exists - reuse

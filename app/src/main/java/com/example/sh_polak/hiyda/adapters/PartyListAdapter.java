@@ -38,6 +38,7 @@ public class PartyListAdapter extends BaseAdapter {
     private final int res;
     public static int countReturnedViews = 0;
 
+
     public PartyListAdapter(Context c, int res, List<Map> results){
         this.results = results;
         this.context = c;

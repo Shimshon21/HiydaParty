@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:onClick="startMap"/>
         <TextView
-            android:tag="PartiesList"
+            android:tag="Myorders"
             android:background="@drawable/menu_button2"
             android:layout_weight="1.5"
             android:text="place"

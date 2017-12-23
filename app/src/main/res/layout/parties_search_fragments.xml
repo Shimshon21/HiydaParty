@@ -14,6 +14,7 @@
         android:id="@+id/searchBtn"
         android:layout_width="60sp"
         android:layout_height="40sp"
+        android:layout_toStartOf="@+id/searchFragText"
         android:background="@drawable/magnifyinglass"
         />
     <android.support.v7.widget.RecyclerView

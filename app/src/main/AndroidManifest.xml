@@ -11,6 +11,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.example.sh_polak.hiyda.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
     <permission
         android:name="com.example.sh_polak.hiyda.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -19,7 +20,7 @@
         android:allowBackup="true"
         android:banner="@drawable/background"
         android:icon="@mipmap/ganga"
-        android:label="Testapp"
+        android:label="Hiyda"
         android:roundIcon="@mipmap/ganga"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
@@ -46,9 +47,8 @@
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.SignInActivity" />
         <activity android:name=".Activities.AddPartyActivity" />
-
         <activity android:name=".Activities.SpecificPartyActivity" />
-        <activity android:name=".Activities.FragnentActivity"/>
+        <activity android:name=".Activities.FragnentActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -56,24 +56,29 @@
 
         <activity
             android:name=".Activities.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:label="@string/title_activity_maps" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.FavoriteActivity"></activity>
     </application>
 
 </manifest>

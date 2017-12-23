@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getFaceBookKeyHasH();
         Backendless.initApp(getApplicationContext(), getString(R.string.appId), getString(R.string.keyId));//Todo task need to check the bug java.lang.RuntimeException: Could not register device on Backendless server: Not existing user_fragment token - D4EB5525-C23F-99C3-FFB0-D9BF24E18500. Relogin user_fragment to update your user_fragment token
         setContentView(R.layout.activity_login);
         facUserLogged=getPreferences(MODE_PRIVATE);
@@ -205,6 +206,23 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
         });
 
 
+    }
+
+    private void getFaceBookKeyHasH() {//some error from facebook that repeat itself this method is for generate the requsted keyhash to put in facebook developer.
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.example.sh_polak.hiyda",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
     }
 
 }

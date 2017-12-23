@@ -1,7 +1,6 @@
 package com.example.sh_polak.hiyda.fragments;
 
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +20,10 @@ import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.example.sh_polak.hiyda.Interface.AppConfig;
 import com.example.sh_polak.hiyda.R;
-import com.example.sh_polak.hiyda.adapters.RecycleAdapterTest;
-import com.example.sh_polak.hiyda.utils.ImageLoadTask;
-import java.util.HashMap;
+import com.example.sh_polak.hiyda.adapters.RecycleAdapterList;
+
 import java.util.List;
 import java.util.Map;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -59,21 +54,21 @@ public class SearcParty extends Fragment implements AppConfig {
         itemSearch();
     }
 
-    public  void itemSearch(){// TODO: 19/10/2017  add method for search item from Backendless.
+    public  void itemSearch(){//  method for search item from Backendless.
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 DataQueryBuilder queryBuilder = DataQueryBuilder.create();
                 if (!search.getText().toString().isEmpty()){
-                    queryBuilder.setWhereClause("name = " + "'" + search.getText().toString() + "'");
+                    queryBuilder.setWhereClause("name LIKE " + "'" + search.getText().toString() + "%'");
                     Backendless.Data.of("A_publicist_user").find(queryBuilder, new AsyncCallback<List<Map>>() {
                         @Override
                         public void handleResponse(List<Map> response) {//null pointer when result is out of block need to invstigate
-                        layout.setAdapter(new RecycleAdapterTest(getContext(),response));
+                        layout.setAdapter(new RecycleAdapterList(getContext(),response));
                         }
                         @Override
                         public void handleFault(BackendlessFault fault) {
-                            Toast.makeText(getContext(), "notgg", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "this item not exist", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }}});}

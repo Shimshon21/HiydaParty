@@ -2,8 +2,6 @@ package com.example.sh_polak.hiyda.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.sh_polak.hiyda.R;
-import com.example.sh_polak.hiyda.fragments.LocationParties;
+import com.example.sh_polak.hiyda.fragments.Myorders;
 import com.example.sh_polak.hiyda.fragments.MainListActivity;
 import com.example.sh_polak.hiyda.fragments.PartiesList;
 import com.example.sh_polak.hiyda.fragments.SearcParty;
@@ -28,7 +26,7 @@ public class FragnentActivity extends AppCompatActivity  {
         fragmentMap.put("UserFragement",new UserFragment());
         fragmentMap.put("SearcParty",new SearcParty());
         fragmentMap.put("PartiesList",new PartiesList());
-        fragmentMap.put("LocationParties",new LocationParties());
+        fragmentMap.put("Myorders",new Myorders());
         fragmentMap.put("MainListActivity",new MainListActivity());
     }
     @Override
@@ -42,7 +40,7 @@ public class FragnentActivity extends AppCompatActivity  {
 
 
 
-    public void chooseFragments(View view) {
+    public void chooseFragments(View view) {//show fragment in screen by tag of the button he was pressed.
         String name= view.getTag().toString();
         System.out.println(view.getTag());
        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();

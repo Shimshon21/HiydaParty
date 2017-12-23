@@ -1,5 +1,6 @@
 package com.example.sh_polak.hiyda.Activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sh_polak.hiyda.R;
+import com.example.sh_polak.hiyda.utils.PremissionManger;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -50,16 +53,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onStart();
         try{
             //check for available location provider
-            if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) Log.i("My locations","********GPS enabled*******");
+           // if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) Log.i("My locations","********GPS enabled*******");
             if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))Log.i("My locations","********Network: Wifi & 3G,4G... enabled*******");
             //OR get best provider by Criteria
             Criteria c=new Criteria();//indicates criteria for location provider selection or in my words with this u could to config the all option of the gps like power and which provider to use
-            c.setAccuracy(c.POWER_LOW);//low battery consumption
+            c.setAccuracy(c.POWER_MEDIUM);//low battery consumption
             String bestProvider=locationManager.getBestProvider(c, true);//best provider for given criteria
             Log.i("NullPointerCheck",bestProvider+" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             locationManager.getLastKnownLocation(bestProvider);//get last known location from given provider
             //register location listener listener with GPS
-            this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 10, new MyLocListener());//requaestLocation get provider,every which time look for location update ,distance which u passed, which merhod to invoke/
+           this.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1,new MyLocListener());//requaestLocation get provider,every which time look for location update ,distance which u passed, which merhod to invoke/
         }catch (SecurityException e){
             Log.e("My maps","******Almog*********Location service - disabled - permission rejected");
         }
@@ -108,16 +111,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
-    private class MyLocListener implements LocationListener {
+    private class MyLocListener implements LocationListener {// location is not changing somehow.
         @Override//when location changed
         public void onLocationChanged(Location location) {
+
+            Log.i("Location Check "," my location"+location.getLatitude() + location.getLongitude() +"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             if(location != null){
                 Log.i("  My - location","*************Moved to "+location.getLatitude()+","+location.getLongitude()+" **************");
                 //store new current location
                 MapsActivity.this.location=location;
+                //LatLng langLat = new LatLng(location.getLongitude(),);
                 //change location for existing marker
-                myMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLongitude(),location.getLatitude()),16.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),location.getLongitude())));
+            myMarker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),11f));
+                mMap.getMaxZoomLevel();
               myMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder));
             }
         }

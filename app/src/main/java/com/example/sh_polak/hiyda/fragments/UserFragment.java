@@ -1,5 +1,6 @@
 package com.example.sh_polak.hiyda.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.example.sh_polak.hiyda.Activities.FavoriteActivity;
 import com.example.sh_polak.hiyda.Activities.LoginActivity;
 import com.example.sh_polak.hiyda.Interface.AppConfig;
 import com.example.sh_polak.hiyda.R;
@@ -44,24 +47,31 @@ public class UserFragment extends Fragment implements AppConfig {
     @Override
     public void appConfiguration() {
         btnLogOut=(Button)root.findViewById(R.id.logoutBtn);
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {//logout from user
-                Backendless.UserService.logout(new AsyncCallback<Void>() {
+        TextView favorites = (TextView)root.findViewById(R.id.myFavorites);
+        favorites.setOnClickListener((View view)-> startActivity(new Intent(getActivity(), FavoriteActivity.class)));
+        logout(btnLogOut);
+    }
 
-                    @Override
-                    public void handleResponse(Void response) {
-                        LoginActivity.facUserLogged.edit().clear();
-                        LoginManager.getInstance().logOut();
-                        getActivity().finish();
-                    }
 
-                    @Override
-                    public void handleFault(BackendlessFault fault) {
-                        Toast.makeText(getContext(), "Error occoured" + fault.getCode(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
+
+    public void logout(Button btnLogOut){// logout from facebook / backendless User.
+        btnLogOut.setOnClickListener(view -> {//logout from user
+            Backendless.UserService.logout(new AsyncCallback<Void>() {
+
+                @Override
+                public void handleResponse(Void response) {
+                    LoginActivity.facUserLogged.edit().clear();
+                    LoginManager.getInstance().logOut();
+                    getActivity().finish();
+                }
+
+                @Override
+                public void handleFault(BackendlessFault fault) {
+                    Toast.makeText(getContext(), "Error occoured" + fault.getCode(), Toast.LENGTH_LONG).show();
+                }
+            });
         });
+
+
     }
 }
