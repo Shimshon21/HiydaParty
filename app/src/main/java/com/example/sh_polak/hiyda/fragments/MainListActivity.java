@@ -43,7 +43,7 @@ public class MainListActivity extends Fragment implements AppConfig {
     ListView listView;
     View v;
     int LOCATION_REQ=0;
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.parties_mainlist_fragment,container,false);
@@ -70,8 +70,6 @@ public class MainListActivity extends Fragment implements AppConfig {
         mainProgressbar = (ProgressBar)v.findViewById(R.id.listFragViewProgress);
         mainProgressbar.setVisibility(View.VISIBLE);
         bundle =getActivity().getIntent().getExtras();
-        registerTextView = (TextView)v.findViewById(R.id.RegisterParty);
-        search=(EditText)v.findViewById(R.id.searcPart);
         partiesListViews.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 

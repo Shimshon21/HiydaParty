@@ -100,8 +100,11 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
 
     private void ifExistInTable(RecyclerHolder holder, String partyName) {//checking if value exist in sql table favoritess if set checked else unchecked
         if (db != null) {
+            System.out.println(partyName);
             Cursor c = db.rawQuery("SELECT name FROM favoritess WHERE name =?", new String[]{partyName}); // check if the value exists
+            System.out.println(c.moveToFirst() +""+ c);
             if (c.moveToFirst()) { //check if found the value
+                holder.favorite.setChecked(true);
                 boolean b = c.getString(0).equals(partyName);
                 System.out.println(b);
                 if (c.getString(0).equals(partyName)) {// if the value match set checked current row
@@ -109,8 +112,8 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
                     System.out.println(c.getString(0));
                 } else
                     holder.favorite.setChecked(false);
-            } else if (holder.favorite.isChecked()) {//todo - fix bug to change favorite check when the reuse favorite button checked is repeating itself when scroll list.
-
+            } else if (holder.favorite.isChecked()) {
+                holder.favorite.setChecked(false);//todo - fix bug to change favorite check when the reuse favorite button checked is repeating itself when scroll list.
             }
         }
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.example.sh_polak.hiyda.Activities.AddPartyActivity;
@@ -34,7 +35,6 @@ public class UserFragment extends Fragment implements AppConfig {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.user_fragment, container, false);
     }
     @Override
@@ -42,20 +42,25 @@ public class UserFragment extends Fragment implements AppConfig {
         super.onViewCreated(view, savedInstanceState);
         root = view;
         appConfiguration();
-
     }
 
     @Override
     public void appConfiguration() {
         btnLogOut=(Button)root.findViewById(R.id.logoutBtn);
         TextView addParty = (TextView)root.findViewById(R.id.addParty);
-        addParty.setOnClickListener((View view)-> startActivity(new Intent(getActivity(), AddPartyActivity.class)));
+        addParty.setOnClickListener((View view)->{
+           Boolean userType;
+           Toast.makeText(getContext(),"Sorry u are not vip user ",Toast.LENGTH_SHORT).show();
+          if(userType=new Boolean((boolean)Backendless.UserService.CurrentUser().getProperty("VIPUser"))) {
+              if (userType)
+              startActivity(new Intent(getActivity(), AddPartyActivity.class));
+          }});
         logout(btnLogOut);
     }
 
 
 
-    public void logout(Button btnLogOut){// logout from facebook / backendless User.
+    public void logout(Button btnLogOut){// logou=t from facebook / backendless User.
         btnLogOut.setOnClickListener(view -> {//logout from user
             Backendless.UserService.logout(new AsyncCallback<Void>() {
 
