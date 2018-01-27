@@ -79,7 +79,6 @@ public class MainListActivity extends Fragment implements AppConfig {
             public void handleResponse(List<Map> response) {
                 result = response;
                 Log.i("result",result.toString());
-
                 partiesListViews.setAdapter(new RecycleAdapterList(getContext(), result));//cant load more than 10 items because of backe endlesss
                 mainProgressbar.setVisibility(View.INVISIBLE);
             }

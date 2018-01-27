@@ -31,7 +31,6 @@ import java.util.Map;
 public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.RecyclerHolder> {
     Context context;
     List<Map> result;
-    boolean isCliked;
     SQLiteDatabase db;
 
     public RecycleAdapterList(Context context, List<Map> result) {
@@ -64,22 +63,22 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
         return holder;
     }
 
+
+    //Change the specific view
     @Override
-    public void onBindViewHolder(final RecyclerHolder holder, final int position) {//change the specific view
-//        Map map = result.get(position);//// TODO add image and textView import the image from result.get("ImageParty")
+    public void onBindViewHolder(final RecyclerHolder holder, final int position) {
+        Cursor c = db.rawQuery("SELECT * FROM favoritess ",null );
         final String partyName = result.get(position).get("name").toString();
         final String partyDate = result.get(position).get("DateTime").toString();
         final String partyImage = result.get(position).get("PartyImage").toString();
-        ((RecyclerHolder) holder).textView.setText(result.get(position).get("name").toString());
-
-        ImageLoadTask task = new ImageLoadTask() {//configure the imageView.
+         holder.textView.setText(result.get(position).get("name").toString());
+        ImageLoadTask task = new ImageLoadTask() {//Configure the imageView.
             @Override
             protected void onPreExecute() {
                 holder.imageView.setImageBitmap(null);
                 holder.progressBar.setVisibility(View.VISIBLE);
             }
-
-            protected void onPostExecute(Bitmap bmp) {
+           protected void onPostExecute(Bitmap bmp) {
                 if (bmp != null) {
                     holder.imageView.setImageBitmap(bmp);
                     holder.progressBar.setVisibility(View.INVISIBLE);
@@ -87,40 +86,36 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
                     holder.imageView.setImageResource(R.drawable.no_image);
                 }
             }
-        };//condigure the imageView.
+        };
         holder.loadTask(task, partyImage);
         holder.textView2.setText(partyDate);
         holder.setIndex(position);
-
-            ifExistInTable(holder,partyName); //
-
-            addToFavoritesList(holder,partyName,partyImage,partyDate);
+        ifExistInTable(holder,partyName);
+        addToFavoritesList(holder,partyName,partyImage,partyDate);
         }
 
 
     private void ifExistInTable(RecyclerHolder holder, String partyName) {//checking if value exist in sql table favoritess if set checked else unchecked
-        if (db != null) {
-            System.out.println(partyName);
+
+       if (db != null) {
             Cursor c = db.rawQuery("SELECT name FROM favoritess WHERE name =?", new String[]{partyName}); // check if the value exists
-            System.out.println(c.moveToFirst() +""+ c);
             if (c.moveToFirst()) { //check if found the value
                 holder.favorite.setChecked(true);
                 boolean b = c.getString(0).equals(partyName);
-                System.out.println(b);
                 if (c.getString(0).equals(partyName)) {// if the value match set checked current row
                     holder.favorite.setChecked(true);
-                    System.out.println(c.getString(0));
                 } else
                     holder.favorite.setChecked(false);
             } else if (holder.favorite.isChecked()) {
-                holder.favorite.setChecked(false);//todo - fix bug to change favorite check when the reuse favorite button checked is repeating itself when scroll list.
+                holder.favorite.setChecked(false);
             }
         }
     }
 
     private void addToFavoritesList(RecyclerHolder holder,String partyname,String partyImage ,String partyDate) { //when checked add to sql  table favoritess when is not checked remove..
         holder.favorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            String insert;
+           String insert;
+           if(buttonView.isPressed()){
             if (isChecked) {
                 insert = " INSERT INTO favoritess (name,PartyImage,DateTime,isFavorite) VALUES ((?),(?),(?),'1') ";
                 db.execSQL(insert, new String[]{partyname, partyImage, partyDate});
@@ -128,7 +123,7 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
                 insert = " DELETE FROM favoritess WHERE name =(?)";
                 db.execSQL(insert, new String[]{partyname});
             }
-        });
+        }});
     }
 
     @Override
@@ -163,7 +158,7 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
             this.index = index;
         }
 
-        public void loadTask(ImageLoadTask newTask, String image) {//avoid bug error of reloding images that not placed right.
+        public void loadTask(ImageLoadTask newTask, String image) {//Avoid bug error of reloding images that not placed right.
             if (this.currentTask != null) //if there is old task already, cancel it
                 this.currentTask.cancel(false);
             this.currentTask = newTask; //set new reference
