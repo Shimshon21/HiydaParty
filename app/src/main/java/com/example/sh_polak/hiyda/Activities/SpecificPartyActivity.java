@@ -72,7 +72,7 @@ public class SpecificPartyActivity extends AppCompatActivity implements AppConfi
                     Backendless.Data.of("A_publicist_user").save(contact, new AsyncCallback<Map>() {
                         @Override
                         public void handleResponse(Map response) {
-                            Toast.makeText(getApplicationContext(), "Ticket purchase was successfull", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Bug error unavaible.", Toast.LENGTH_LONG).show();
                             freeCapacity.setText("number of Tickets left :" + response.get("Capacity").toString());
                         //    finish();
                         }
