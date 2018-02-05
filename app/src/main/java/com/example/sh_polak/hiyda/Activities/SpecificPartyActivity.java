@@ -61,7 +61,8 @@ public class SpecificPartyActivity extends AppCompatActivity implements AppConfi
         DataQueryBuilder dataQuery= DataQueryBuilder.create();
         dataQuery.setWhereClause("objectId = '"+obid+"'");
         if(Integer.parseInt(String.valueOf(attenders.getText()))<=capacity) {
-            Backendless.Persistence.of("A_publicist_user").find(dataQuery, new AsyncCallback<List<Map>>() {
+            Toast.makeText(getApplicationContext(), "Bug error unavaible.", Toast.LENGTH_LONG).show();
+           /* Backendless.Persistence.of("A_publicist_user").find(dataQuery, new AsyncCallback<List<Map>>() {
                 @Override
                 public void handleResponse(List<Map> response) {//TODO FiX bug adding new row in backendless instead updating row.
                     System.out.println(response);
@@ -89,6 +90,7 @@ public class SpecificPartyActivity extends AppCompatActivity implements AppConfi
                     System.out.println(fault.getMessage());
                 }
             });
+            */
         }else Toast.makeText(this,"You cant buy more tickets than there is",Toast.LENGTH_SHORT).show();
     }
 
