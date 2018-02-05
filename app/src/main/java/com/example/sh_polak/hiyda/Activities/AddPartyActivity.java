@@ -181,23 +181,6 @@ public class AddPartyActivity extends AppCompatActivity implements AppConfig {
             }
         });
     }
-
-    /*
-        public void UploadPArtyImage(Uri image){
-            f = new File(getPath(image));
-            Backendless.Files.upload(f, "PartyImages", new AsyncCallback<BackendlessFile>() {
-                @Override
-                public void handleResponse(BackendlessFile response) {
-                    System.out.println("sucssessfull");
-
-                }
-
-                @Override
-                public void handleFault(BackendlessFault fault) {
-                    System.out.println("error" + fault.getMessage());
-
-                }
-            });*/
     public String getPath(Uri uri) {
         if (uri == null) {
             return null;

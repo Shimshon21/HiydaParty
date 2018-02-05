@@ -67,10 +67,11 @@ public class RecycleAdapterList extends RecyclerView.Adapter<RecycleAdapterList.
     //Change the specific view
     @Override
     public void onBindViewHolder(final RecyclerHolder holder, final int position) {
+
         Cursor c = db.rawQuery("SELECT * FROM favoritess ",null );
-        final String partyName = result.get(position).get("name").toString();
-        final String partyDate = result.get(position).get("DateTime").toString();
-        final String partyImage = result.get(position).get("PartyImage").toString();
+            final String partyName = result.get(position).get("name").toString();
+            final String partyDate = result.get(position).get("DateTime").toString();
+            final String partyImage = result.get(position).get("PartyImage").toString();
          holder.textView.setText(result.get(position).get("name").toString());
         ImageLoadTask task = new ImageLoadTask() {//Configure the imageView.
             @Override
