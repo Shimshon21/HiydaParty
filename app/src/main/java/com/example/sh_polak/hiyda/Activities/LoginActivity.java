@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFaceBookKeyHasH();
+     /*   getFaceBookKeyHasH();
         Backendless.initApp(getApplicationContext(), getString(R.string.appId), getString(R.string.keyId));//Todo task need to check the bug java.lang.RuntimeException: Could not register device on Backendless server: Not existing user_fragment token - D4EB5525-C23F-99C3-FFB0-D9BF24E18500. Relogin user_fragment to update your user_fragment token
         setContentView(R.layout.activity_login);
         facUserLogged=getPreferences(MODE_PRIVATE);
@@ -70,8 +70,9 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
         appConfiguration(); // Configuring views/backendless
         callbackManager = CallbackManager.Factory.create();
        loginButton = (LoginButton) findViewById(R.id.login_button);
-        facebookLogin();
-
+        facebookLogin();*/
+        Intent i = new Intent(this, FragnentActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
     @Override
     protected void onStart() {
         super.onStart();
-        isValidLogin();
+   //     isValidLogin();
 
 
     }
@@ -148,7 +149,7 @@ public class LoginActivity extends AppCompatActivity implements AppConfig {
     public void appConfiguration() {// Configuring views/backendless
         mName = (EditText) findViewById(R.id.loginName);
         mPassword = (EditText) findViewById(R.id.loginPass);
-        mEmail = (EditText) findViewById(R.id.loginEmail);
+       // mEmail = (EditText) findViewById(R.id.loginEmail);
         checkBox = (CheckBox) findViewById(R.id.stayIn);
         Typeface tf = Typeface.createFromAsset(getAssets(), "superfruit.ttf");
         TextView tv = (TextView) findViewById(R.id.title);

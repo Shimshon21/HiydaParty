@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HiydaEx03.iml" filepath="$PROJECT_DIR$/HiydaEx03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HiydaParty.iml" filepath="$PROJECT_DIR$/HiydaParty.iml" group="HiydaParty" />
+      <module fileurl="file://$PROJECT_DIR$/app/HiydaParty-app.iml" filepath="$PROJECT_DIR$/app/HiydaParty-app.iml" group="HiydaParty/app" />
+      <module fileurl="file://$PROJECT_DIR$/facebook-android-sdk-4.27.0/HiydaParty-facebook-android-sdk-4.27.0.iml" filepath="$PROJECT_DIR$/facebook-android-sdk-4.27.0/HiydaParty-facebook-android-sdk-4.27.0.iml" group="HiydaParty/facebook-android-sdk-4.27.0" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/facebook-android-sdk-4.27.0/facebook-android-sdk-4.27.0.iml" filepath="$PROJECT_DIR$/facebook-android-sdk-4.27.0/facebook-android-sdk-4.27.0.iml" />
     </modules>

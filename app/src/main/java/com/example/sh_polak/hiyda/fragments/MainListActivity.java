@@ -60,8 +60,8 @@ public class MainListActivity extends Fragment implements AppConfig {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PremissionManger.check(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION,LOCATION_REQ);
-        loadPartyList();
+  //      PremissionManger.check(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION,LOCATION_REQ);
+       // loadPartyList();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MainListActivity extends Fragment implements AppConfig {
         Backendless.Data.of("A_publicist_user").find(new AsyncCallback<List<Map>>() {
             @Override
             public void handleResponse(List<Map> response) {
-                result = response;
+           //     result = response;
                 Log.i("result",result.toString());
                 partiesListViews.setAdapter(new RecycleAdapterList(getContext(), result));//cant load more than 10 items because of backe endlesss
                 mainProgressbar.setVisibility(View.INVISIBLE);
@@ -89,9 +89,6 @@ public class MainListActivity extends Fragment implements AppConfig {
                 Toast.makeText(getContext(),"Error occoured loading the list please try again later",Toast.LENGTH_SHORT).show();
             }
         });
-        //List<Map>result=Backendless.Persistence.of("A_publicist_user").find();
-        //System.out.println(result);
-        // partiesListViews.setAdapter(new PartyListAdapter(MainActivity.this,R.layout.row,result));
     }
 
 

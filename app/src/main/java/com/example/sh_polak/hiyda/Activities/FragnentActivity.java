@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FragnentActivity extends AppCompatActivity  {
-   private static Map<String,Fragment>fragmentMap=new HashMap<>();
+  private static Map<String,Fragment>fragmentMap=new HashMap<>();
     Button searchBtn;
     FragmentTransaction transaction;
     static {

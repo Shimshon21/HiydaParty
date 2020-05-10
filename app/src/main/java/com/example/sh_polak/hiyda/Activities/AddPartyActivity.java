@@ -169,7 +169,7 @@ public class AddPartyActivity extends AppCompatActivity implements AppConfig {
 
 
     private void uploadFileData() {
-        Backendless.Files.upload(f, "PartyImages", new AsyncCallback<BackendlessFile>() {
+     /*   Backendless.Files.upload(f, "PartyImages", new AsyncCallback<BackendlessFile>() {
             @Override
             public void handleResponse(BackendlessFile response) {
                 System.out.println("Image uploded succsfully");
@@ -179,7 +179,7 @@ public class AddPartyActivity extends AppCompatActivity implements AppConfig {
             public void handleFault(BackendlessFault fault) {
                 System.out.println("error" + fault.getMessage());
             }
-        });
+        });*/
     }
     public String getPath(Uri uri) {
         if (uri == null) {
